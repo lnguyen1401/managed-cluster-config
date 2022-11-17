@@ -9,6 +9,14 @@ To add a new SelectorSyncSet, add your yaml manifest to the `deploy` dir, then r
 Alternatively you can enable GitHub Actions on your fork and `make` will be ran automatically. Additionally,
 the action will create a new commit with the generated files.
 
+To add a Policy
+- If the manifest of the object you want to convert to policy already exists in ./deploy :  Right now the policies are group by their funtionalities (like the rbac-policies that will generate all the policies for rbac related thing.). So if you want to add an rbac manifest, go to ./resources/policy-generator-templates/rbac-policies, edit the policy-generator-config.yaml file by adding under `policies` section. 
+- If the manifest of the object does not exist; add your manifests; then either create a new policy-generator-config.yaml in ./resources/policy-generator-templates/<$dir-relevant-to-your-object>/. See the example in /rbac-policies.
+-Policies requires to be deploy in namespaces, so if the new policies don't belong to `openshift-managed-rbac-config`, create a manifest to create a new namespace. Example: ./deploy/acm-policies/00-openshift-managed-rbac-policies.Namespace.yaml 
+
+Then Run `make`
+`make` will look for the `policy-generator-config.yaml` files, runs it with the PolicyGenerator binary and save the output to `./deploy/acm-policies` directory. `make` will then automatically
+add the policy as a new SelectorySyncSet.
 
 # Building
 

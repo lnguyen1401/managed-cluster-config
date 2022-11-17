@@ -1,0 +1,20 @@
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+    name: rbac-policies
+policyDefaults:
+    namespace: openshift-managed-rbac-policies
+    placement:
+        clusterSelectors:
+            hypershift.open-cluster-management.io/hosted-cluster: "true"
+    remediationAction: enforce
+    pruneObjectBehavior: "DeleteIfCreated"
+policies:
+    - name: dedicated-admin
+      manifests:
+          # NOTE to use a path, the target directory must NOT have a `config.yaml` else it is included in the policy
+          - path: ./deploy/rbac-permissions-operator-config
+    - name: cluster-admin
+      manifests:
+          # cannot use directory because it contains `config.yaml`
+          - path: ./deploy/osd-cluster-admin/03-cluster-admin.ClusterRoleBinding.yaml
