@@ -1,5 +1,5 @@
 #!/bin/bash
-DIRECTORY="./resources/policy-generator-templates/*/*"
+DIRECTORY="./tmp/policy-generator-templates/*/*"
 FILENAME="policy-generator-config.yaml"
 find $DIRECTORY -name $FILENAME -exec sh -c '
 for file; do

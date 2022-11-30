@@ -10,11 +10,7 @@ policyDefaults:
     remediationAction: enforce
     pruneObjectBehavior: "DeleteIfCreated"
 policies:
-    - name: dedicated-admin
+    - name: #Filled by script
       manifests:
           # NOTE to use a path, the target directory must NOT have a `config.yaml` else it is included in the policy
-          - path: ./deploy/rbac-permissions-operator-config
-    - name: cluster-admin
-      manifests:
-          # cannot use directory because it contains `config.yaml`
-          - path: ./deploy/osd-cluster-admin/03-cluster-admin.ClusterRoleBinding.yaml
+          - path: #Filled by script
